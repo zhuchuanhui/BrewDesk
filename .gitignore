@@ -1,0 +1,6 @@
+.build/
+outputs/
+DerivedData/
+*.dmg
+*.zip
+
