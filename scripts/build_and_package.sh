@@ -23,7 +23,7 @@ fi
 APP_NAME="BrewDesk"
 BUILD_DIR="$ROOT_DIR/.build/release"
 OUTPUT_DIR="$ROOT_DIR/outputs"
-APP_DIR="$BUILD_DIR/$APP_NAME.app"
+APP_DIR="$OUTPUT_DIR/$APP_NAME.app"
 DMG_PATH="$OUTPUT_DIR/${APP_NAME}-${VERSION}.dmg"
 
 rm -rf "$APP_DIR"
