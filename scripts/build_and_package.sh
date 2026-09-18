@@ -29,7 +29,12 @@ DMG_PATH="$OUTPUT_DIR/${APP_NAME}-${VERSION}.dmg"
 rm -rf "$APP_DIR"
 mkdir -p "$OUTPUT_DIR" "$APP_DIR/Contents/MacOS" "$APP_DIR/Contents/Resources"
 
-BIN_PATH="$(swift build -c release --product "$APP_NAME" --show-bin-path)/$APP_NAME"
+swift build -c release --product "$APP_NAME"
+BIN_PATH="$(find .build -type f -path "*/release/$APP_NAME" -perm -111 -print -quit)"
+if [[ -z "$BIN_PATH" ]]; then
+  echo "ビルドしたアプリ本体が見つかりません" >&2
+  exit 1
+fi
 cp "$BIN_PATH" "$APP_DIR/Contents/MacOS/$APP_NAME"
 cp "$ROOT_DIR/work/Info.plist" "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$APP_DIR/Contents/Info.plist"
